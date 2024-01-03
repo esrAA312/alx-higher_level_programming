@@ -2,7 +2,7 @@
 """
 This module defines a function that prints the given first and last names.
 Functions:
-    say_my_name(first_name, last_name=""): Prints My name is <first name> <last name>.
+    say_my_name(first_name, last_name="").
 """
 
 
