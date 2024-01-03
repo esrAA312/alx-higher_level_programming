@@ -182,32 +182,31 @@ class TestMaxInteger(unittest.TestCase):
                 0.7504024417975862, 0.2762206358275794,
                 0.20607476376994403, 0.9497689034126078,
                 2.1498649449691808]), 29.496355326217377)
-	 def test_numeric_string(self):
-        """Unittest for max_integer([..])"""
+    def test_string_input(self):
+        """Unittest for max_integer with numeric string input"""
         self.assertEqual(max_integer("192834754"), "9")
 
-    def test_string(self):
-        """Unittest for max_integer([..])"""
-        self.assertEqual(max_integer("Hollton"), "t")
+    def test_char_input(self):
+	    """Unittest for max_integer with character input"""
+		    self.assertEqual(max_integer("Hollton"), "t")
 
-    def test_lists(self):
-        """Unittest for max_integer([..])"""
-        self.assertEqual(max_integer([[], [2], [4], [2, 9]]), [4])
+    def test_list_of_lists(self):
+	"""Unittest for max_integer with a list of lists"""
+		self.assertEqual(max_integer([[], [2], [4], [2, 9]]), [4])
 
-    def test_str_list(self):
-        """Unittest for max_integer([..])"""
-        self.assertEqual(
-            max_integer([["foo"], ["boo"], ["abc"], ["yic"], ["aic"]]),
-            ["yic"])
+    def test_str_list_input(self):
+	    """Unittest for max_integer with a list of strings"""
+		    self.assertEqual(
+				    max_integer([["foo"], ["boo"], ["abc"], ["yic"], ["aic"]]), ["yic"])
 
-    def test_inf(self):
-        """Unittest for max_integer([..])"""
-        self.assertEqual(max_integer([99, float('inf'), float('-inf')]),
-                         float('inf'))
+def test_infinity_input(self):
+    """Unittest for max_integer with infinity in the input"""
+    self.assertEqual(max_integer([99, float('inf'), float('-inf')]),
+                     float('inf'))
 
-    def test_nan(self):
-        """Unittest for max_integer([..])"""
-        self.assertEqual(max_integer([999, float('nan'), 1000]), 1000)
+def test_nan_input(self):
+    """Unittest for max_integer with NaN in the input"""
+    self.assertEqual(max_integer([999, float('nan'), 1000]), 1000)
 
     def test_mixed_list(self):
         """Unittest for max_integer([..])"""
