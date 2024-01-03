@@ -1,64 +1,52 @@
-The ``5-text_indentation`` module
-============================
-
-Using ``text_indentation``
----------------------
-
 Import module:
     >>> text_indentation = __import__('5-text_indentation').text_indentation
 
-
     >>> text_indentation("Hi ALX")
     Hi ALX
-
-
-    >>> text_indentation("ALX          ")
+    >>> text_indentation("ALX                 ")
     ALX
-
-
-    >>> text_indentation("        ALX")
+    >>> text_indentation("   .     Hi   ")
+    .
+    <BLANKLINE>
+    Hi
+    >>> text_indentation("            ALX")
     ALX
     
-
     >>> text_indentation("        ALX          ")
     ALX
-    
-
-    >>> text_indentation("")
-
-
-    >>> text_indentation("           ")
-
-
-    >>> text_indentation("Hi: ALX")
+    >>> text_indentation("   Hi:   Ok   ?  ")
     Hi:
     <BLANKLINE>
+    Ok?
+    <BLANKLINE> 
+    >>> text_indentation("")
+    >>> text_indentation("           ")
+    >>> text_indentation()
+    Traceback (most recent call last):
+    ...
+    TypeError: text_indentation() missing 1 required positional argument: 'text'
+    >>> text_indentation("Hi:: ALX")
+    Hi:
+    <BLANKLINE>
+    :
+    <BLANKLINE>
     ALX
-
-
-    >>> text_indentation("      ?:  :  ")
-    ?
+    >>> text_indentation("           .:    :  ")
+    .
     <BLANKLINE>
     :
     <BLANKLINE>
     :
     <BLANKLINE>
-
-
     >>> text_indentation("\n")
     <BLANKLINE>
-
-
-    >>> text_indentation("\n\n")
+    >>> text_indentation("\n\n\n")
     <BLANKLINE>
     <BLANKLINE>
-
-
-    >>> text_indentation("Hi\n\n")
-    hi
     <BLANKLINE>
-
-
+    >>> text_indentation("Hi  \n   \n  ")
+    Hi  
+    <BLANKLINE>
     >>> text_indentation("Hi: ALX? from. sudan")
     Hi:
     <BLANKLINE>
@@ -67,19 +55,7 @@ Import module:
     from.
     <BLANKLINE>
     sudan
-
-
-    >>> text_indentation("Hi   :     ALX    ?    from.    sudan")
-    Hello:
-    <BLANKLINE>
-    Holberton?
-    <BLANKLINE>
-    school.
-    <BLANKLINE>
-    fooo
-
-
-    >>> text_indentation("Hi   :     ALX    ?    from.    sudan     ")
+    >>> text_indentation("Hi  :       ALX    ?  from.                 sudan")
     Hi:
     <BLANKLINE>
     ALX?
@@ -87,8 +63,21 @@ Import module:
     from.
     <BLANKLINE>
     sudan
-
-
+    >>> text_indentation("         Hi   :     ALX    ?    from.    sudan     ")
+    Hi:
+    <BLANKLINE>
+    ALX?
+    <BLANKLINE>
+    from.
+    <BLANKLINE>
+    sudan
+    >>> text_indentation("Hello. inf World. How are you?")
+    Hello.
+    <BLANKLINE>
+    inf World.
+    <BLANKLINE>
+    How are you?
+    <BLANKLINE>
     >>> text_indentation(".?:")
     .
     <BLANKLINE>
@@ -96,22 +85,34 @@ Import module:
     <BLANKLINE>
     :
     <BLANKLINE>
-
-
-    >>> text_indentation("     ?   ")
+    >>> text_indentation("     ?      ")
     ?
     <BLANKLINE>
-
-
-    >>> text_indentation("?Hi.")
-    ?
+    >>> text_indentation("    :   ")
+    :
+    <BLANKLINE>
+    >>> text_indentation("   .   ")
+    .
+    <BLANKLINE>
+    >>> text_indentation(":Hi.")
+    :
     <BLANKLINE>
     Hi.
     <BLANKLINE>
-
-
-    >>> text_indentation("?\n\n.\n\n:")
+    >>> text_indentation("Programming. nan is interesting.")
+    Programming.
+    <BLANKLINE>
+    nan is interesting.
+    <BLANKLINE>    
+    >>> text_indentation("?yes!?")
     ?
+    <BLANKLINE>
+    yes!?
+    <BLANKLINE>
+
+    >>> text_indentation("?\n\n\n.\n\n:")
+    ?
+    <BLANKLINE>
     <BLANKLINE>
     <BLANKLINE>
     <BLANKLINE>
@@ -121,15 +122,17 @@ Import module:
     <BLANKLINE>
     :
     <BLANKLINE>
-
-
     >>> text_indentation(None)
     Traceback (most recent call last):
     ...
     TypeError: text must be a string
 
-
     >>> text_indentation(567)
+    Traceback (most recent call last):
+    ...
+    TypeError: text must be a string
+
+    >>> text_indentation(-567)
     Traceback (most recent call last):
     ...
     TypeError: text must be a string
