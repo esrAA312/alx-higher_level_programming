@@ -44,7 +44,8 @@ def matrix_divided(matrix, div):
         raise TypeError("div must be a number")
 
     # Perform matrix division and round to 2 decimal places
-    result_matrix = [[round(element / div, 2) for element in row] for row in matrix]
+    result_matrix = [
+        [round(element / div, 2) for element in row] for row in matrix]
 
     return result_matrix
 
