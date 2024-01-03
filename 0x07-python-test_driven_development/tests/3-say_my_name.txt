@@ -10,5 +10,5 @@ Import module:
     >>> say_my_name("Sam", 12)
     Traceback (most recent call last):
     TypeError: last_name must be a string
-	>>> say_my_name("Anas", "")
-	My name is Anas 
+    >>> say_my_name("Anas", "")
+    My name is Anas 
