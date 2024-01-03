@@ -211,33 +211,38 @@ class TestMaxInteger(unittest.TestCase):
 
     def test_mixed_list(self):
         """Unittest for max_integer([..])"""
-        with self.assertRaises(TypeError):
-            max_integer([[], [2], [4], [2, 9], 99, "foo"])
+		with self.assertRaises(TypeError):
+			max_integer([[], [2], [4], [2, 9], 99, "foo"])
 
-    def test_mixed_list_int_str(self):
-        """Unittest for max_integer([..])"""
-        with self.assertRaises(TypeError):
-            max_integer([99, "foo"])
+    def test_different_types_in_list(self):
+	    """Check if max_integer handles a list with various data types."""
+		    with self.assertRaises(TypeError):
+			    max_integer([[], [2], [4], [2, 9], 99, "foo"])
 
-    def test_none(self):
-        """Unittest for max_integer([..])"""
-        with self.assertRaises(TypeError):
-            max_integer(None)
+     def test_integer_and_string_mixed_list(self):
+	     """Verify max_integer behavior with a list containing both integers and strings."""
+		     with self.assertRaises(TypeError):
+			     max_integer([99, "foo"])
 
-    def test_dict(self):
-        """Unittest for max_integer([..])"""
-        with self.assertRaises(TypeError):
-            max_integer([{20: 23, 14: 45}, {"a": "b"}])
+    def test_input_none(self):
+	    """Validate max_integer response when given None."""
+		    with self.assertRaises(TypeError):
+			    max_integer(None)
 
-    def test_int(self):
-        """Unittest for max_integer([..])"""
-        with self.assertRaises(TypeError):
-            max_integer(98)
+    def test_dictionary_input(self):
+	    """Test max_integer behavior with a list containing dictionaries."""
+		    with self.assertRaises(TypeError):
+			    max_integer([{20: 23, 14: 45}, {"a": "b"}])
 
-    def test_float(self):
-        """Unittest for max_integer([..])"""
-        with self.assertRaises(TypeError):
-            max_integer(9.8)
+    def test_integer_input(self):
+	    """Check max_integer handling for a single integer."""
+		    with self.assertRaises(TypeError):
+			    max_integer(98)
+
+    def test_float_input(self):
+	    """Evaluate max_integer response with a single float."""
+		    with self.assertRaises(TypeError):
+			    max_integer(9.8)
 
 if __name__ == '__main__':
     unittest.main()
