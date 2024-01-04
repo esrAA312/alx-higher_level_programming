@@ -4,6 +4,7 @@
 
 class Rectangle:
     """Defining the Rectangle object"""
+
     def __init__(self, width=0, height=0):
         """The initialzation of a Rectangle"""
         self.height = height
@@ -38,7 +39,7 @@ class Rectangle:
         self.__height = value
 
     def area(self):
-        """ measure and  return the Rectangle area"""
+        """measure and  return the Rectangle area"""
         return self.__width * self.__height
 
     def perimeter(self):
@@ -50,6 +51,5 @@ class Rectangle:
     def __str__(self):
         rectangle_str = ""
         if self.__width != 0 and self.__height != 0:
-            rectangle_str += "\n".join(
-                    "#" * self.__width for _ in range(self.__height))
+            rectangle_str += "\n".join("#" * self.__width for _ in range(self.__height))
         return rectangle_str
