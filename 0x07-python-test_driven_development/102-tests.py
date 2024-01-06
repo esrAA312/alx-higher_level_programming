@@ -1,21 +1,27 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <wchar.h>
+#include <locale.h>
+#include <Python.h>
+#include <unicodeobject.h>
 
-import ctypes
+/**
+ * print_python_string - prints about python strings
+ * @p: address of pyobject
+ */
 
-
-lib = ctypes.CDLL('./libPython.so')
-lib.print_python_string.argtypes = [ctypes.py_object]
-s = "The spoon does not exist"
-lib.print_python_string(s)
-s = "ложка не существует"
-lib.print_python_string(s)
-s = "La cuillère n'existe pas"
-lib.print_python_string(s)
-s = "勺子不存在"
-lib.print_python_string(s)
-s = "숟가락은 존재하지 않는다."
-lib.print_python_string(s)
-s = "スプーンは存在しない"
-lib.print_python_string(s)
-s = b"The spoon does not exist"
-lib.print_python_string(s)
-julien@ubuntu:~/0x07. Pyhton Strings$ gcc -shared -Wl,-soname,libPython.so -o libPython.so -fPIC -I/usr/include/python3.4 102-python.c
+void print_python_string(PyObject *p)
+{
+	wprintf(L"[.] string object info\n");
+	if (strcmp(p->ob_type->tp_name, "str"))
+	{
+		wprintf(L"  [ERROR] Invalid String Object\n");
+		return;
+	}
+	if (PyUnicode_IS_COMPACT_ASCII(p))
+		wprintf(L"  type: compact ascii\n");
+	else
+		wprintf(L"  type: compact unicode object\n");
+	wprintf(L"  length: %lu\n", PyUnicode_GET_LENGTH(p));
+	wprintf(L"  value: %ls\n", PyUnicode_AS_UNICODE(p));
+}
