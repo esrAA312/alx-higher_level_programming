@@ -70,12 +70,12 @@ Import module:
     >>> matrix_mul([[11, 12], [13, 14, 15], [13, 14]], [[15, 16, 11], [17, 18, 12]])
     Traceback (most recent call last):
     ...
-    TypeError: each row of m_a must should be of the same size
+    TypeError: each row of m_a must be of the same size
 
     >>> matrix_mul([[100, 982], [30, 54], [23, 74]], [[59, 16, 18], [7, 82]])
     Traceback (most recent call last):
     ...
-    TypeError: each row of m_b must should be of the same size
+    TypeError: each row of m_b must be of the same size
 
     >>> matrix_mul([[67]])
     Traceback (most recent call last):
@@ -111,7 +111,7 @@ Import module:
     >>> matrix_mul([[11, 22], [33, 44, 55]], [[11, 22], [33, 44]])
     Traceback (most recent call last):
     ...
-    TypeError: each row of m_a must should be of the same size
+    TypeError: each row of m_a must be of the same size
 
     >>> matrix_mul([[10, 'c'], [30, 40]], [['x', 20], [30, 40]])
     Traceback (most recent call last):
