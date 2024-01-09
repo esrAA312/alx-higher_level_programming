@@ -12,13 +12,13 @@ class Student:
         """retrieves a dictionary representation
         of a Student"""
         try:
-            for atr in atrs:
+            for atr in attrs:
                 if type(atr) is not str:
                     return self.__dict__
         except Exception:
             return self.__dict__
         my_d = dict()
         for k, v in self.__dict__.items():
-            if k in atrs:
+            if k in attrs:
                 my_d[k] = v
         return my_d
