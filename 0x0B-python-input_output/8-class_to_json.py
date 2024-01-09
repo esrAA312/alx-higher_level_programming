@@ -3,5 +3,5 @@
 
 
 def class_to_json(obj):
-    """ dictionary represntation."""
+    """dictionary represntation."""
     return obj.__dict__

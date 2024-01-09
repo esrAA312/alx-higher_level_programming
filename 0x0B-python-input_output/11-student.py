@@ -28,4 +28,4 @@ class Student:
 
         for k, v in json.items():
             if k in self.__dict__:
-                self.__dict__[k] = v v v v v v v v v 
+                self.__dict__[k] = v  
