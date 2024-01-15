@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-'''Module for Square unit tests.'''
+"""Module for Square unit tests."""
 import unittest
 from models.base import Base
 from models.square import Square
@@ -9,7 +9,8 @@ import io
 
 
 class TestSquare(unittest.TestCase):
-    '''Tests the Base class.'''
+    """Tests the Base class."""
+
     def test_I_area_no_args(self):
         m = Square(7)
         with self.assertRaises(TypeError) as e:

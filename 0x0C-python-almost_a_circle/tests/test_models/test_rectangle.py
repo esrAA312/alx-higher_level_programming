@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-'''Module Rectangle'''
+"""Module Rectangle"""
 
 import io
 import sys
@@ -8,8 +8,9 @@ from models.base import Base
 from models.rectangle import Rectangle
 from contextlib import redirect_stdout
 
+
 class TestRectangle(unittest.TestCase):
-    '''Tests to Base'''
+    """Tests to Base"""
 
     def test_None_width(self):
         with self.assertRaisesRegex(TypeError, "width must be an integer"):
@@ -49,7 +50,7 @@ class TestRectangle(unittest.TestCase):
 
     def test_bytes_width(self):
         with self.assertRaisesRegex(TypeError, "width must be an integer"):
-            Rectangle(b'P', 32)
+            Rectangle(b"P", 32)
 
     def test_negative_width(self):
         with self.assertRaisesRegex(ValueError, "width must be > 0"):
@@ -58,9 +59,21 @@ class TestRectangle(unittest.TestCase):
     def test_zero_width(self):
         with self.assertRaisesRegex(ValueError, "width must be > 0"):
             Rectangle(0, 26)
+
     def invalid_types(self):
-        m = (3.1, -1.221, float('inf'), float('-inf'), True, "hi", (6,),
-             [7], {5}, {6: 7}, None)
+        m = (
+            3.1,
+            -1.221,
+            float("inf"),
+            float("-inf"),
+            True,
+            "hi",
+            (6,),
+            [7],
+            {5},
+            {6: 7},
+            None,
+        )
         return m
 
     def test_J_display_no_args(self):
@@ -96,8 +109,13 @@ class TestRectangle(unittest.TestCase):
         m = Rectangle(1, 30)
         self.assertEqual(str(type(m)), "<class 'models.rectangle.Rectangle'>")
         self.assertTrue(isinstance(m, Base))
-        n = {'_Rectangle__height': 30, '_Rectangle__width': 1,
-             '_Rectangle__x': 0, '_Rectangle__y': 0, 'id': 24}
+        n = {
+            "_Rectangle__height": 30,
+            "_Rectangle__width": 1,
+            "_Rectangle__x": 0,
+            "_Rectangle__y": 0,
+            "id": 24,
+        }
         self.assertDictEqual(m.__dict__, n)
 
         with self.assertRaises(TypeError) as e:
@@ -117,7 +135,7 @@ class TestRectangle(unittest.TestCase):
 
     def test_to_dictionary_out(self):
         m = Rectangle(101, 22, 11, 89, 5)
-        c = {'x': 11, 'y': 89, 'id': 5, 'height': 22, 'width': 101}
+        c = {"x": 11, "y": 89, "id": 5, "height": 22, "width": 101}
         self.assertDictEqual(c, m.to_dictionary())
 
     def test_to_dictionary_no(self):
@@ -130,6 +148,7 @@ class TestRectangle(unittest.TestCase):
         r = Rectangle(10, 20, 6, 1, 2)
         with self.assertRaises(TypeError):
             r.to_dictionary(1)
+
 
 if __name__ == "__main__":
     unittest.main()
