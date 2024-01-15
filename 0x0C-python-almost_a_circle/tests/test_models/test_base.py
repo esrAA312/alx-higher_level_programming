@@ -134,8 +134,8 @@ class TestBase(unittest.TestCase):
 
         try:
             os.remove("Rectangle.json")
-        '''except:
-            pass'''
+        except:
+            pass
         Rectangle.save_to_file([])
         with open("Rectangle.json", "r") as f:
             self.assertEqual(f.read(), "[]")
