@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-'''ModuleSquare'''
+"""ModuleSquare"""
 import unittest
 from models.base import Base
 from models.square import Square
@@ -9,11 +9,11 @@ import io
 
 
 class TestSquare(unittest.TestCase):
-    '''Tests Base class.'''
+    """Tests Base class."""
 
     def test_nan_x(self):
         with self.assertRaisesRegex(TypeError, "x must be an integer"):
-            Square(1, float('nan'), 20)
+            Square(1, float("nan"), 20)
 
     def test_complex_y(self):
         with self.assertRaisesRegex(TypeError, "y must be an integer"):
@@ -44,8 +44,19 @@ class TestSquare(unittest.TestCase):
             Square(1, 3, range(5))
 
     def invalid_types(self):
-        n = (3.1, -1.51, float('inf'), float('-inf'), True, "hi", (4,),
-             [4], {4}, {9: 77}, None)
+        n = (
+            3.1,
+            -1.51,
+            float("inf"),
+            float("-inf"),
+            True,
+            "hi",
+            (4,),
+            [4],
+            {4},
+            {9: 77},
+            None,
+        )
         return n
 
     def test_dict_x(self):
@@ -128,6 +139,7 @@ class TestSquare(unittest.TestCase):
             Square.display()
         p = "display() missing 1 required positional argument: 'self'"
         self.assertEqual(str(e.exception), p)
+
 
 if __name__ == "__main__":
     unittest.main()
