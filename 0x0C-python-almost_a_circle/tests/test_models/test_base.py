@@ -81,30 +81,4 @@ class TestBase(unittest.TestCase):
             pass
         Rectangle.save_to_file([])
         with open("Rectangle.json", "r") as f:
-	     self.assertEqual(f.read(), "[]")
-
-    def test_o_save_to_file(self):
-        '''Tests save_to_file() method.'''
-        import os
-        m = Rectangle(10, 7, 6, 9)
-        m1 = Rectangle(2, 5)
-        Rectangle.save_to_file([m, m1])
-
-        with open("Rectangle.json", "r") as f:
-            self.assertEqual(len(f.read()), 107)
-
-        Rectangle.save_to_file(None)
-        with open("Rectangle.json", "r") as f:
             self.assertEqual(f.read(), "[]")
-
-        try:
-            os.remove("Rectangle.json")
-        except:
-            pass
-        Rectangle.save_to_file([])
-        with open("Rectangle.json", "r") as f:
-            self.assertEqual(f.read(), "[]")
-
-
-if __name__ == "__main__":
-    unittest.main()
