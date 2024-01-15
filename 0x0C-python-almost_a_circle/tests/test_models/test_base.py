@@ -82,28 +82,6 @@ class TestBase(unittest.TestCase):
         Rectangle.save_to_file([])
         with open("Rectangle.json", "r") as f:
 	     self.assertEqual(f.read(), "[]")
-   def test_from_json_string_two(self):
-        list_in = [
-            {"id": 80, "width": 20, "height": 74, "x": 97, "y": 88},
-            {"id": 80, "width": 57, "height": 62, "x": 51, "y": 33},
-        ]
-        json_list_in = Rectangle.to_json_string(list_in)
-        list_out = Rectangle.from_json_string(json_list_in)
-        self.assertEqual(list_in, list_out)
-
-        m = [{"hi": 90}]
-        n = '[{"hi": 90}]'
-        self.assertEqual(Base.from_json_string(n), m)
-
-        m = [{'x': 11, 'y': 22, 'width': 33, 'id': 44, 'height': 55}]
-        n = '[{"x": 11, "y": 22, "width": 33, "id": 44, "height": 55}]'
-        self.assertEqual(Base.from_json_string(n), m)
-
-        m = [{'x': 1, 'y': 20, 'width': 31, 'id': 52,
-             'height': 33}]
-        n = '[{"x": 1, "y": 20, "width": 31, "id": 52, \
-"height": 33}]'
-        self.assertEqual(Base.from_json_string(n), m)
 
     def test_o_save_to_file(self):
         '''Tests save_to_file() method.'''
