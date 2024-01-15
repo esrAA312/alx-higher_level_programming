@@ -17,3 +17,21 @@ class TestSquare(unittest.TestCase):
             Square.area()
         n = "area() missing 1 required positional argument: 'self'"
         self.assertEqual(str(e.exception), n)
+    def test_list_size(self):
+        with self.assertRaisesRegex(TypeError, "width must be an integer"):
+            Square([8, 7, 6])
+
+    def test_set_size(self):
+        with self.assertRaisesRegex(TypeError, "width must be an integer"):
+            Square({7, 2, 7}, 9)
+
+    def test_J_display_no_args(self):
+        m = Square(3)
+        with self.assertRaises(TypeError) as e:
+            Square.display()
+        p = "display() missing 1 required positional argument: 'self'"
+        self.assertEqual(str(e.exception), p)
+
+if __name__ == "__main__":
+    unittest.main()
+			
