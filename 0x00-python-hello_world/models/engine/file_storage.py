@@ -7,7 +7,7 @@ from models.base_model import BaseModel
 import models
 
 
-class FileStorage():
+class FileStorage:
     """FileStorage"""
 
     __file_path = "file.json"
@@ -18,27 +18,26 @@ class FileStorage():
         return self.__objects
 
     def new(self, obj):
-        """ new"""
+        """new"""
         key = obj.__class__.__name__ + "." + str(obj.id)
         self.__objects[key] = obj
 
     def save(self):
-        """ SAVE """
+        """SAVE"""
         jno = {}
         for key in self.__objects:
             jno[key] = self.__objects[key].to_dict()
 
-        with open(self.__file_path, 'w')as F:
+        with open(self.__file_path, "w") as F:
             json.dump(jno, F)
 
     def reload(self):
-        """ reload """
+        """reload"""
         try:
-            with open(self.__file_path, 'r', encoding="UTF8") as F:
+            with open(self.__file_path, "r", encoding="UTF8") as F:
                 ES = json.load(F)
                 self._objects = {
-                      key: eval(value["__class__"])(**value)
-                      for key, value in ES.items()
-                      }
+                    key: eval(value["__class__"])(**value) for key, value in ES.items()
+                }
         except FileNotFoundError:
             pass
