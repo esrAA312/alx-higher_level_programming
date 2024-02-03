@@ -2,6 +2,7 @@
 """
 console.py
 """
+import re
 import cmd
 from models.base_model import BaseModel
 import shlex
@@ -22,6 +23,7 @@ class HBNBCommand(cmd.Cmd):
     hbnbcommand
     """
 
+    completekey = 'tab' 
     prompt = "(hbnb) "
     CC = ["BaseModel", "User", "Amenity", "Place", "Review", "State", "City"]
 
@@ -158,7 +160,44 @@ class HBNBCommand(cmd.Cmd):
                 pass
             setattr(instanceU, attribute_name, atname)
             storage.save()
+    def default(self, arg):
+        """Default behavior for cmd module when input is invalid"""
+        argdict = {
+            "all": self.do_all,
+            "show": self.do_show,
+            "destroy": self.do_destroy,
+            "update": self.do_update,
+            "count": self.do_count
+        }
+        match = re.search(r"\.", arg)
+        if bool(match):
+            start, end = match.span()
+            argl = [arg[:start], arg[end:]]
 
+            match = re.search(r"\((.*?)\)", argl[1])
+            if bool(match):
+                start, end = match.span()
+                command_text = argl[1][:start]
+                command_argument = match.group()[1:-1]
+                command = [command_text, command_argument]
+
+
+                if command[0] in argdict.keys():
+                    call = f"{argl[0]} {command[1]}"
+                    return argdict[command[0]](call)
+        print(f"*** Unknown syntax: {arg}")
+
+        return False
+    
+    def do_count(self, arg):
+        """Usage: count <class> or <class>.count()
+        Retrieve the number of instances of a given class."""
+        argl = shlex.split(arg)
+        count = 0
+        for obj in storage.all().values():
+            if argl[0] == obj.__class__.__name__:
+                count += 1
+        print(count) 
 
 if __name__ == "__main__":
     HBNBCommand().cmdloop()
