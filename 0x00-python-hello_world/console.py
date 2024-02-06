@@ -162,6 +162,19 @@ class HBNBCommand(cmd.Cmd):
             storage.save()
     def default(self, arg):
         """Default behavior for cmd module when input is invalid"""
+       
+        arg_list = arg.split('.')
+
+        cls_nm = arg_list[0]  # incoming class name
+
+        command = arg_list[1].split('(')
+
+        cmd_met = command[0]  # incoming command method
+
+        e_arg = command[1].split(')')[0]  # extra argument
+        
+        al = e_arg.split(',')
+       
         argdict = {
             "all": self.do_all,
             "show": self.do_show,
@@ -182,12 +195,20 @@ class HBNBCommand(cmd.Cmd):
                 command = [command_text, command_argument]
 
 
-                if command[0] in argdict.keys():
-                    call = f"{argl[0]} {command[1]}"
-                    return argdict[command[0]](call)
+                if cmd_met in argdict.keys():
+                    if cmd_met != "update":
+                        
+                        call = f"{argl[0]} {e_arg}"
+                        return argdict[cmd_met](call)
+                    else:
+                        ob = al[0]
+                        ana = al[1]
+                        ava = al [2]
+                        return argdict[cmd_met]("{} {} {} {}".format(cls_nm, ob, ana, ava))
         print(f"*** Unknown syntax: {arg}")
 
         return False
+    
     
     def do_count(self, arg):
         """Usage: count <class> or <class>.count()
