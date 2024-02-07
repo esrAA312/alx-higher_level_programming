@@ -165,16 +165,16 @@ class HBNBCommand(cmd.Cmd):
        
         arg_list = arg.split('.')
 
-        cls_nm = arg_list[0]  # incoming class name
+        cls_nm = arg_list[0]
 
         command = arg_list[1].split('(')
 
-        cmd_met = command[0]  # incoming command method
+        cmd_met = command[0]
 
-        e_arg = command[1].split(')')[0]  # extra argument
-        
+        e_arg = command[1].split(')')[0]
+
         al = e_arg.split(',')
-       
+
         argdict = {
             "all": self.do_all,
             "show": self.do_show,
@@ -194,22 +194,23 @@ class HBNBCommand(cmd.Cmd):
                 command_argument = match.group()[1:-1]
                 command = [command_text, command_argument]
 
-
                 if cmd_met in argdict.keys():
                     if cmd_met != "update":
-                        
                         call = f"{argl[0]} {e_arg}"
                         return argdict[cmd_met](call)
                     else:
                         ob = al[0]
-                        ana = al[1]
-                        ava = al [2]
-                        return argdict[cmd_met]("{} {} {} {}".format(cls_nm, ob, ana, ava))
+                        ana = al[1:]
+                        print (ana)
+                        if isinstance(ana, dict):
+                            for k, v in dic.items():
+                                return argdict[cmd_met]("{} {} {} {}".format(cls_nm, ob, k, v))
+                        else:
+                             return argdict[cmd_met]("{} {} {} {}".format(cls_nm, ob, al[1], al[2]))
+
         print(f"*** Unknown syntax: {arg}")
 
         return False
-    
-    
     def do_count(self, arg):
         """Usage: count <class> or <class>.count()
         Retrieve the number of instances of a given class."""
