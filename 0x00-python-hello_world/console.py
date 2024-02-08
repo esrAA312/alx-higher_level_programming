@@ -16,6 +16,7 @@ from models.place import Place
 from models.review import Review
 import sys
 import json
+import ast
 
 
 class HBNBCommand(cmd.Cmd):
@@ -168,8 +169,9 @@ class HBNBCommand(cmd.Cmd):
         command = arg_list[1].split('(')
         cmd_met = command[0]
         e_arg = command[1].split(')')[0]
+        print(e_arg)
         al = e_arg.split(',')
-       
+        print(al)
         argdict = {
             "all": self.do_all,
             "show": self.do_show,
@@ -177,7 +179,7 @@ class HBNBCommand(cmd.Cmd):
             "update": self.do_update,
             "count": self.do_count
         }
-        match = re.search(r"\.", arg)
+        match = re.search(r"\.",arg)
         if bool(match):
 
             start, end = match.span()
@@ -190,8 +192,6 @@ class HBNBCommand(cmd.Cmd):
                 command_text = argl[1][:start]
                 command_argument = match.group()[1:-1]
                 command = [command_text, command_argument]
-
-
                 if cmd_met in argdict.keys():
                     if cmd_met != "update":
                         
