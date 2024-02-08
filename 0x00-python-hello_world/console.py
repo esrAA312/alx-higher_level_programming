@@ -141,18 +141,17 @@ class HBNBCommand(cmd.Cmd):
         elif len(args) < 4:
             print("* value missing *")
         else:
-            class_name = args[0]
-            instance_id = args[1]
-            attribute_name = args[2]
-            atname = args[3]
+            class_name, instance_id, attribute_name, atname = args[:4]
 
-            keyI = class_name + "." + instance_id
+            keyI = f"{class_name}.{instance_id}"
             dicI = storage.all()
-            try:
-                instanceU = dicI[keyI]
-            except KeyError:
+
+            instanceU = dicI.get(keyI)
+
+            if instanceU is None:
                 print("** no instance found **")
                 return
+
             try:
                 typeA = type(getattr(instanceU, attribute_name))
                 atname = typeA(atname)
@@ -202,24 +201,27 @@ class HBNBCommand(cmd.Cmd):
                         ob = al[0]
                         ana = al[1:]
                         print (ana)
-                        if isinstance(ana, dict):
+                        sana = ','.join(ana)
+                        try:
+                            dic = json.loads(sana)
+                            print(dic)
+                            print(type(dic))
                             for k, v in dic.items():
                                 return argdict[cmd_met]("{} {} {} {}".format(cls_nm, ob, k, v))
-                        else:
-                             return argdict[cmd_met]("{} {} {} {}".format(cls_nm, ob, al[1], al[2]))
+                        except json.JSONDecodeError:
+                            print("Error decoding the dictionary string.")
 
         print(f"*** Unknown syntax: {arg}")
 
         return False
+
     def do_count(self, arg):
-        """Usage: count <class> or <class>.count()
-        Retrieve the number of instances of a given class."""
+        """count()"""
+
         argl = shlex.split(arg)
-        count = 0
-        for obj in storage.all().values():
-            if argl[0] == obj.__class__.__name__:
-                count += 1
-        print(count) 
+        count = sum(1 for obj in storage.all().values()
+            if argl[0] == obj.__class__.__name__)
+        print(count)
 
 if __name__ == "__main__":
     HBNBCommand().cmdloop()
