@@ -141,17 +141,18 @@ class HBNBCommand(cmd.Cmd):
         elif len(args) < 4:
             print("* value missing *")
         else:
-            class_name, instance_id, attribute_name, atname = args[:4]
+            class_name = args[0]
+            instance_id = args[1]
+            attribute_name = args[2]
+            atname = args[3]
 
-            keyI = f"{class_name}.{instance_id}"
+            keyI = class_name + "." + instance_id
             dicI = storage.all()
-
-            instanceU = dicI.get(keyI)
-
-            if instanceU is None:
+            try:
+                instanceU = dicI[keyI]
+            except KeyError:
                 print("** no instance found **")
                 return
-
             try:
                 typeA = type(getattr(instanceU, attribute_name))
                 atname = typeA(atname)
@@ -163,17 +164,12 @@ class HBNBCommand(cmd.Cmd):
         """Default behavior for cmd module when input is invalid"""
        
         arg_list = arg.split('.')
-
         cls_nm = arg_list[0]
-
         command = arg_list[1].split('(')
-
         cmd_met = command[0]
-
         e_arg = command[1].split(')')[0]
-
         al = e_arg.split(',')
-
+       
         argdict = {
             "all": self.do_all,
             "show": self.do_show,
@@ -183,45 +179,44 @@ class HBNBCommand(cmd.Cmd):
         }
         match = re.search(r"\.", arg)
         if bool(match):
+
             start, end = match.span()
             argl = [arg[:start], arg[end:]]
 
             match = re.search(r"\((.*?)\)", argl[1])
             if bool(match):
+
                 start, end = match.span()
                 command_text = argl[1][:start]
                 command_argument = match.group()[1:-1]
                 command = [command_text, command_argument]
 
+
                 if cmd_met in argdict.keys():
                     if cmd_met != "update":
+                        
                         call = f"{argl[0]} {e_arg}"
                         return argdict[cmd_met](call)
                     else:
                         ob = al[0]
-                        ana = al[1:]
-                        print (ana)
-                        sana = ','.join(ana)
-                        try:
-                            dic = json.loads(sana)
-                            print(dic)
-                            print(type(dic))
-                            for k, v in dic.items():
-                                return argdict[cmd_met]("{} {} {} {}".format(cls_nm, ob, k, v))
-                        except json.JSONDecodeError:
-                            print("Error decoding the dictionary string.")
-
+                        ana = al[1]
+                        print(ana)
+                        ava = al[2]
+                        print(ava)
+                        return argdict[cmd_met]("{} {} {} {}".format(cls_nm, ob, ana, ava))
         print(f"*** Unknown syntax: {arg}")
-
         return False
-
+    
+    
     def do_count(self, arg):
-        """count()"""
-
+        """Usage: count <class> or <class>.count()
+        Retrieve the number of instances of a given class."""
         argl = shlex.split(arg)
-        count = sum(1 for obj in storage.all().values()
-            if argl[0] == obj.__class__.__name__)
-        print(count)
+        count = 0
+        for obj in storage.all().values():
+            if argl[0] == obj.__class__.__name__:
+                count += 1
+        print(count) 
 
 if __name__ == "__main__":
     HBNBCommand().cmdloop()
