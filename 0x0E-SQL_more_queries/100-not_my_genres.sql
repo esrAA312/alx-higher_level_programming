@@ -1,4 +1,4 @@
---not linked to one row
+-- list all rows not linked to one row
 SELECT name
 FROM tv_genres
 WHERE name NOT IN
