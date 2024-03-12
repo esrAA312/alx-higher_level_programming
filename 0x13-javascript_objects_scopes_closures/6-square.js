@@ -6,14 +6,16 @@ module.exports = class Square extends SquareP {
     if (c === undefined) {
       c = 'X';
     }
-    let squareStr = '';
-    for (let i = 0; i < this.height; i++) {
-      let row = '';
-      for (let j = 0; j < this.width; j++) {
-        row += c;
+    let X = 0;
+    while (X < this.height) {
+      let s = '';
+      let Y = 0;
+      while (Y < this.width) {
+        s += c;
+        Y++;
       }
-      squareStr += row + '\n';
+      console.log(s);
+      X++;
     }
-    console.log(squareStr);
   }
 };
