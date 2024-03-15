@@ -23,7 +23,7 @@ def list_states(username, password, database, state_name):
                    ON `ct`.`state_id` = `s`.`id` \
                 ORDER BY `ct`.`id`"
     )
-    print(", ".join([ct[2] for ct in c.fetchall() if ct[4] == sys.argv[4]]))
+    print(", ".join([ct[2] for ct in ct.fetchall() if ct[4] == sys.argv[4]]))
     db.close()
 
 
