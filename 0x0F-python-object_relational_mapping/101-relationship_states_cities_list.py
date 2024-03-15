@@ -1,26 +1,33 @@
 #!/usr/bin/python3
-"""
-Lists all State objects and corresponding City objects contained in the DB
-"""
+"""Module that lists all State objects"""
 import sys
-from relationship_state import Base, State
-from relationship_city import City
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
+from relationship_state import State
+from relationship_city import City
 
 
-if __name__ == '__main__':
-    engine = create_engine('mysql+mysqldb://{}:{}@localhost:3306/{}'.
-                           format(sys.argv[1], sys.argv[2], sys.argv[3]),
-                           pool_pre_ping=True)
-    Base.metadata.create_all(engine)
-
+def print_states_and_cities(username, password, database):
+    engine = create_engine(
+        f"mysql+mysqldb://{username}:{password}@localhost/{database}",
+        pool_pre_ping=True,
+    )
     Session = sessionmaker(bind=engine)
     session = Session()
 
-    st = session.query(State).outerjoin(City).order_by(State.id, City.id).all()
+    states = session.query(State).order_by(State.id).all()
+    state_index = 0
+    while state_index < len(states):
+        state = states[state_index]
+        print(f"{state.id}: {state.name}")
+        city_index = 0
+        while city_index < len(state.cities):
+            city = state.cities[city_index]
+            print(f"    {city.id}: {city.name}")
+            city_index += 1
+        state_index += 1
 
-    for state in st:
-        print("{}: {}".format(state.id, state.name))
-        for city in state.cities:
-            print("    {}: {}".format(city.id, city.name))
+
+if __name__ == "__main__":
+    username, password, database = sys.argv[1], sys.argv[2], sys.argv[3]
+    print_states_and_cities(username, password, database)
