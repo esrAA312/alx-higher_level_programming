@@ -19,13 +19,11 @@ def list_states(username, password, database):
     cursor = db.cursor()
 
     cursor.execute(
-        (
-            
+        (            
                 "SELECT city.id, city.name, st.name \
                 FROM cities city, states st \
                 WHERE city.state_id = st.id \
-                ORDER BY city.id"
-            
+                ORDER BY city.id"   
         )
     )
 
