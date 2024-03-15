@@ -1,6 +1,5 @@
 #!/usr/bin/python3
-"""Module that retrieves and prints first\
-        states from a MySQL database using SQLAlchemy."""
+"""Module that retrieves and prints first"""
 import sys
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
@@ -19,4 +18,7 @@ if __name__ == "__main__":
     session = Session()
 
     state = session.query(State).order_by(State.id).first()
-print(f"{state.id}: {state.name}" if state is not None else "Nothing")
+    if first_state != None:
+        print("{}: {}".format(first_state.id, first_state.name))
+    else:
+        print("Nothing")
