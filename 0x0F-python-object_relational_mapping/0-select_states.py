@@ -17,11 +17,12 @@ def list_states(username, password, database):
 
     cursor = db.cursor()
 
-    cursor.execute("SELECT * FROM states ORDER BY states. id")
+    cursor.execute("SELECT * FROM states ORDER BY states.id")
 
     rows = cursor.fetchall()
     [print(row) for row in rows]
 
+    cursor.close()
     db.close()
 
 
