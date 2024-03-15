@@ -20,7 +20,7 @@ if __name__ == "__main__":
     session = Session()
     one = session.query(State).order_by(State.id).first()
 
-    if one != None:
+    if one is not None:
         print("{}: {}".format(one.id, one.name))
     else:
         print("Nothing")
