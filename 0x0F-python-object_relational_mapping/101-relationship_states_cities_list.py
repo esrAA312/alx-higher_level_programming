@@ -1,33 +1,27 @@
 #!/usr/bin/python3
-"""Module that lists all State objects"""
+"""
+Creates the State "California" with the City "San Francisco" from a DB
+"""
 import sys
+from relationship_state import Base, State
+from relationship_city import City
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from relationship_state import State
-from relationship_city import City
 
 
-def print_states_and_cities(username, password, database):
-    engine = create_engine(
-        f"mysql+mysqldb://{username}:{password}@localhost/{database}",
-        pool_pre_ping=True,
-    )
+if __name__ == '__main__':
+    engine = create_engine('mysql+mysqldb://{}:{}@localhost:3306/{}'.
+                           format(sys.argv[1], sys.argv[2], sys.argv[3]),
+                           pool_pre_ping=True)
+    Base.metadata.create_all(engine)
+
     Session = sessionmaker(bind=engine)
     session = Session()
 
-    states = session.query(State).order_by(State.id).all()
-    state_index = 0
-    while state_index < len(states):
-        state = states[state_index]
-        print(f"{state.id}: {state.name}")
-        city_index = 0
-        while city_index < len(state.cities):
-            city = state.cities[city_index]
-            print(f"    {city.id}: {city.name}")
-            city_index += 1
-        state_index += 1
+    newState = State(name='California')
+    newCity = City(name='San Francisco')
+    newState.cities.append(newCity)
 
-
-if __name__ == "__main__":
-    username, password, database = sys.argv[1], sys.argv[2], sys.argv[3]
-    print_states_and_cities(username, password, database)
+    session.add(newState)
+    session.add(newCity)
+    session.commit()
