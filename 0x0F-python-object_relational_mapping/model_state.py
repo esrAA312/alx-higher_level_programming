@@ -12,7 +12,7 @@ Base = declarative_base()
 
 class State(Base):
     """
-    State class inherits the Base class
+    State class
     """
     __tablename__ = "states"
 
