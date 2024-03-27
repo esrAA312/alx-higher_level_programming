@@ -1,3 +1,3 @@
 #!/bin/bash
 # A script that sends a DELETE request to the URL
-curl -s "$1" -X DELETE
+[ -z "$1" ] && echo "Usage: $0 <URL>" && exit 1 || curl -s -X DELETE "$1"
