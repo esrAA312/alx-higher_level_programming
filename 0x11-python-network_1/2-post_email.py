@@ -16,4 +16,3 @@ if __name__ == "__main__":
     with urllib.request.urlopen(request) as ree:
         Xe = ree.read().decode("utf-8")
         print(Xe)
-
