@@ -14,4 +14,3 @@ if __name__ == "__main__":
             print(be.decode('utf-8'))
     except error.HTTPError as err:
         print(f"Error code: {err.code}")
-
