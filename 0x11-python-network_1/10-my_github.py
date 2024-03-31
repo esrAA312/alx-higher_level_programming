@@ -1,24 +1,23 @@
 #!/usr/bin/python3
-"""github"""
+""" GitHub"""
 import requests
-import sys
+from sys import argv
 
 
-def get_user_id(username, password):
-    url = f"https://api.github.com/user"
-    headers = {"Authorization": f"token {password}"}
-    response = requests.get(url, headers=headers)
-
+def getide(Ue, Pe):
+    Ue = f"https://api.github.com/user"
+    headers = {"Authorization": f"token {Pe}"}
+    response = requests.get(U, headers=headers)
     if response.status_code == 200:
-        user_data = response.json()
-        return user_data["id"]
-    else:
-        return None
+        uu = response.json()
+        if "id" in uu:
+            return uu["id"]
+    return None
 
 
 if __name__ == "__main__":
-    username = sys.argv[1]
-    password = sys.argv[2]
+    ne = argv[1]
+    Pe = argv[2]
 
-    user_id = get_user_id(username, password)
-    print(user_id)
+    ide = getide(Ue, Pe)
+    print(ide)
