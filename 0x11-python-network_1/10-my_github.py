@@ -1,3 +1,6 @@
+#!/usr/bin/python3
+"""github."""
+
 import requests
 import sys
 
